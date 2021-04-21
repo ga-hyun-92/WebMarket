@@ -21,6 +21,7 @@
 	String s_hour=(hour<10?"0":"")+hour;
 	String s_minute=(minute<10?"0":"")+minute;
 	String s_second=(second<10?"0":"")+second;
+	
 	String CT=s_hour+":"+s_minute+":"+s_second+" "+am_pm;
 			
 %>
