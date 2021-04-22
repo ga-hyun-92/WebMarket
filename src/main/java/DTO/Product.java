@@ -20,12 +20,26 @@ public class Product implements Serializable{
 	private String conditions;		//신상품 or 중고품 or 재생품
 	
 	public Product(String productId,String name,int unitPrice) {
-		// TODO Auto-generated constructor stub
 		setProductId(productId);
 		setName(name);
 		setUnitPrice(unitPrice);
 	}
 	
+
+	
+	public Product(String productId,String name,String unitPrice,String description, String manufaturer, 
+					String category,String unitInStock,String condition) 
+	{
+//		if (productId.length()==0) throw new IllegalArgumentException("상품 코드 공란");
+		this.productId=productId;
+		this.name=name;
+		this.unitPrice=Integer.parseInt(unitPrice);
+		this.description=description;
+		this.manufacturer=manufaturer;
+		this.category=category;
+		this.unitsInStock=Integer.parseInt(unitInStock);
+		this.conditions=condition;
+	}
 	
 	public String getProductId() {
 		return productId;
