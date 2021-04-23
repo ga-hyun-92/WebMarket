@@ -1,11 +1,13 @@
 <%@page import="DTO.Product"%>
 <%@page import="DAO.ProductRepository"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ include file="/config.jsp" %>
 <%
 	String productId=request.getParameter("productId");
 	out.println("productId="+productId);
 	//보여줘야할 상품의 상세 정보를 찾기
-	ProductRepository pr=new ProductRepository();
+	ProductRepository pr=ProductRepository.getInstance();
 	Product product=pr.getProduct(productId);
 	
 	//찾은 상품의 상세 정보를 body태그 내 표현문을 사용해서 상세 정보를 출력하기
@@ -51,7 +53,7 @@
 				<h4><%=product.getUnitPrice() %>(원)</h4>
 				<p>
 					<a href="#" class="btn btn-info">상품주문&raquo;</a>
-					<a href="./Products.jsp" class="btn btn-secondary">상품목록&raquo;</a>
+					<a href="/WebMarket/Products.jsp" class="btn btn-secondary">상품목록&raquo;</a>
 					
 				</p>
 			</div>

@@ -1,10 +1,13 @@
+<%@page import="DAO.ProductRepository"%>
 <%@page import="DTO.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:useBean class="DAO.ProductRepository" id="productDAO" scope="session"/>
+<!-- jsp:useBean class="DAO.ProductRepository" id="productDAO" scope="session"/ -->
 <!-- scope="session" : 사용자가 접속해서 브라우저를 끄기 전까지만 살아있도록 -->
+
 <%
-	List<Product> listOfProducts=productDAO.getAlleProducts();
+	ProductRepository pr=ProductRepository.getInstance();
+	List<Product> listOfProducts=pr.getAlleProducts();
 %>
 
 <!DOCTYPE html>
@@ -41,7 +44,7 @@
 				<h3><%=product.getName()%></h3>
 				<p><%=product.getDescription()%></p>
 				<p><%=product.getUnitPrice()%></p>
-				<p><a href="./product.jsp?productId=<%=product.getProductId() %>" class="btn btn-secondary" role="button">상세정보&raquo;</a></p>
+				<p><a href="<%=PRODUCT_PAGE_URL%>&productId=<%=product.getProductId() %>" class="btn btn-secondary" role="button">상세정보&raquo;</a></p>
 			</div>	
 			<%
 				}

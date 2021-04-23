@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import DTO.Product;
+import Exception.DuplicatedProductException;
 
 public class ProductRepository {
 	private List<Product> listOfProducts;
@@ -73,5 +74,21 @@ public class ProductRepository {
 		
 		return product;
 	}
+	
+	//상품추가
+	public void addProduct(Product product) throws DuplicatedProductException{	
+		
+		for(Product nthProduct:listOfProducts) {
+			String nthProductId=nthProduct.getProductId();
+			
+			if (nthProductId.equals(product.getProductId())) {
+				throw new DuplicatedProductException(product.getProductId()+"가 중복되었음");
+			}
+		}
+		
+		listOfProducts.add(product);
+		
+	}
+		
 	
 }

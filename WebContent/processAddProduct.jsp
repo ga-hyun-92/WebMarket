@@ -1,6 +1,10 @@
+<%@page import="Exception.DuplicatedProductException"%>
 <%@page import="DAO.ProductRepository"%>
 <%@page import="DTO.Product"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+
+<%@ include file="/config.jsp"%>
+
 <%
 	request.setCharacterEncoding("UTF-8");
 
@@ -22,6 +26,21 @@
 	//상품정보 저장
 	//ProductRepository 객체의 생성을 제한(싱글턴 패턴)
 	ProductRepository pr=ProductRepository.getInstance();
+	try{
+		
+		pr.addProduct(product);
+		
+		//상품 코드가 중복되지 않아서 성공적으로 상품정보를 저장했다면
+		response.sendRedirect(PRODUCTS_PAGE_URL);
+	}catch(DuplicatedProductException e){
+		//상품 코드가 중복된다면
+		response.sendRedirect(DUPLICATE_PRODUCT_PAGE_URL);
+	}
+	
+	
+	
+	
+	
 %>
 <!DOCTYPE html>
 <html>

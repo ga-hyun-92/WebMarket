@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="/config.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,7 +23,7 @@
 	</div>	
 	
 	<div class="container">
-		<form action="processAddProduct.jsp" class="form-horizontal" method="POST">
+		<form action="<%=PRODUCT_ADD_PROCESS_PAGE_URL%>" class="form-horizontal" method="POST">
 				<div class="form-group row">
 					<label class="col-sm-2">상품코드</label>
 					<div class="col-sm-3">
