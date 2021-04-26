@@ -1,3 +1,6 @@
+<%@page import="java.util.Enumeration"%>
+<%@page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
+<%@page import="com.oreilly.servlet.MultipartRequest"%>
 <%@page import="Exception.DuplicatedProductException"%>
 <%@page import="DAO.ProductRepository"%>
 <%@page import="DTO.Product"%>
@@ -7,7 +10,19 @@
 
 <%
 	request.setCharacterEncoding("UTF-8");
+	
 
+	String filename="";
+	//프로젝트의 절대 경로
+	String realFolder="C:\\Users\\ITPS\\eclipse-workspace\\.metadata\\.plugins\\org.eclipse.wst.server.core\\tmp0\\wtpwebapps\\WebMarket\\images2";
+	//업로드될 파일의 최대 크기:5MB
+	int maxSize=5*1024*1024;
+	//인코딩 유형
+	String encType="UTF-8";
+	
+	MultipartRequest multi=new MultipartRequest(request,realFolder,maxSize,encType,new DefaultFileRenamePolicy());
+	
+	
 	String productId=request.getParameter("productId");
 	String name=request.getParameter("name");
 	String unitPrice=request.getParameter("unitPrice");
@@ -19,9 +34,13 @@
 	int unitInStock_i=Integer.parseInt(unitInStock); 
 	String condition=request.getParameter("condition");
 	
+	Enumeration files=multi.getFileNames();
+	String fileName=(String)files.nextElement();
+	fileName=multi.getFilesystemName(fileName);
+	
 	Product product=new Product(
-								productId,name,unitPrice,description,manufaturer,
-								category,unitInStock,condition);
+			productId,name,unitPrice,description,manufaturer,
+			category,unitInStock,condition,fileName);
 	
 	//상품정보 저장
 	//ProductRepository 객체의 생성을 제한(싱글턴 패턴)

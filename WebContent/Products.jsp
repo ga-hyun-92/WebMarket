@@ -41,6 +41,7 @@
 					Product product=listOfProducts.get(i);
 			%>
 			<div class="col-md-4">
+				<img src="./images2/<%=product.getImagePath()%>">
 				<h3><%=product.getName()%></h3>
 				<p><%=product.getDescription()%></p>
 				<p><%=product.getUnitPrice()%></p>

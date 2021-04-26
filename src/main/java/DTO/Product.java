@@ -18,7 +18,21 @@ public class Product implements Serializable{
 	private String category;		//분류
 	private long unitsInStock;		//재고 수
 	private String conditions;		//신상품 or 중고품 or 재생품
+	//파일 경로 저장해두고 파일 객체를 사용해서 이미지 파일을 핸들링한다.
+	private String imagePath;		//이미지 파일 경로
 	
+	public String getImagePath() {
+		return imagePath;
+	}
+
+
+
+	public void setImagePath(String imagePath) {
+		this.imagePath = imagePath;
+	}
+
+
+
 	public Product(String productId,String name,int unitPrice) {
 		setProductId(productId);
 		setName(name);
@@ -28,7 +42,7 @@ public class Product implements Serializable{
 
 	
 	public Product(String productId,String name,String unitPrice,String description, String manufaturer, 
-					String category,String unitInStock,String condition) 
+					String category,String unitInStock,String condition,String imagePath) 
 	{
 //		if (productId.length()==0) throw new IllegalArgumentException("상품 코드 공란");
 		this.productId=productId;
@@ -39,6 +53,7 @@ public class Product implements Serializable{
 		this.category=category;
 		this.unitsInStock=Integer.parseInt(unitInStock);
 		this.conditions=condition;
+		this.imagePath=imagePath;
 	}
 	
 	public String getProductId() {
@@ -89,6 +104,8 @@ public class Product implements Serializable{
 	public void setConditions(String conditions) {
 		this.conditions = conditions;
 	}
+
+
 	
 	
 }
