@@ -23,16 +23,16 @@
 	MultipartRequest multi=new MultipartRequest(request,realFolder,maxSize,encType,new DefaultFileRenamePolicy());
 	
 	
-	String productId=request.getParameter("productId");
-	String name=request.getParameter("name");
-	String unitPrice=request.getParameter("unitPrice");
+	String productId=multi.getParameter("productId");
+	String name=multi.getParameter("name");
+	String unitPrice=multi.getParameter("unitPrice");
 	int unitPrice_i=Integer.parseInt(unitPrice);
-	String description=request.getParameter("description");
-	String manufaturer=request.getParameter("manufaturer");
-	String category=request.getParameter("category");
-	String unitInStock=request.getParameter("unitInStock"); 
+	String description=multi.getParameter("description");
+	String manufaturer=multi.getParameter("manufaturer");
+	String category=multi.getParameter("category");
+	String unitInStock=multi.getParameter("unitInStock"); 
 	int unitInStock_i=Integer.parseInt(unitInStock); 
-	String condition=request.getParameter("condition");
+	String condition=multi.getParameter("condition");
 	
 	Enumeration files=multi.getFileNames();
 	String fileName=(String)files.nextElement();
