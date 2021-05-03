@@ -20,6 +20,7 @@ public class Product implements Serializable{
 	private String conditions;		//신상품 or 중고품 or 재생품
 	//파일 경로 저장해두고 파일 객체를 사용해서 이미지 파일을 핸들링한다.
 	private String imagePath;		//이미지 파일 경로
+	private int quantity;			//장바구니에 담은 개수
 	
 	public String getImagePath() {
 		return imagePath;
@@ -103,6 +104,14 @@ public class Product implements Serializable{
 	}
 	public void setConditions(String conditions) {
 		this.conditions = conditions;
+	}
+
+	public int getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(int quantity) {
+		this.quantity = quantity;
 	}
 
 

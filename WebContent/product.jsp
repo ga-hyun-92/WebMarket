@@ -56,7 +56,9 @@
 				<p><b>재고 수 </b>: <%=product.getUnitsInStock() %></p>
 				<h4><%=product.getUnitPrice() %>(원)</h4>
 				<p>
-					<a href="#" class="btn btn-info">상품주문&raquo;</a>
+					<a href="#" class="btn btn-info" onclick="addToCart()">상품주문&raquo;</a>
+					<!-- ?productId=<%=productId %> : 어떤 상품을 추가할지,,상품의 아이디로 이동 -->
+					<a href="<%=ADD_TO_CART_PROCESS_URL %>?productId=<%=productId %>" class="btn btn-warning">장바구니&raquo;</a>
 					<a href="/WebMarket/Products.jsp" class="btn btn-secondary">상품목록&raquo;</a>
 					
 				</p>
@@ -67,5 +69,42 @@
 
 
 	<jsp:include page="footer.jsp"/>
+	
+	<script>
+	//자바에 ㄷ들어있던 productId를 자바스크립트 코드로 넣어줌
+		var productId ="<%=productId %>";
+		function addToCart(){
+			//confirm이라는 함수: 확인(true반환),취소(false반환)창 만듬
+			if(confirm("상품을 장바구니에 추가하시겠습니까?")){
+				//상품을 장바구니에 추가하는 코드
+				//ajax -> 서버의 프로그램을 실행시킬수 있는 기능
+				jQuery.ajax({
+					//호출할 url
+					url: "http://192.168.2.31:8081/WebMarket/cart/add",
+					//전달할 데이터
+					data: "productId="+productId,
+					//요청이 성공했다면 함수 실행시켜라
+					success: function(){
+						var isMove=confirm("해당 상품을 장바구니에 추가했습니다.\n[장바구니로 이동하시겠습니까>]");
+						if(isMove){
+							alert("장바구니로 이동합니다.");
+						} 
+					},
+					//요청에서 문제가 발생하면? 해당 코드 실행
+					error: function(){
+						alert("장바구니에 상품을 추가하지 못했습니다.");
+						alert("잠시 후 다시 시도해주세요.");
+					}
+				})
+				
+				//상품을 장바구니에 성공적으로 추가했다면
+				//[장바구니로 이동] | [쇼핑계속하기] 버튼 출력
+				
+			} else{
+				//상품을 장바구니에 추가하지 않는다면은
+				//아무것도 하지 않음
+			}
+		}
+	</script>
 </body>
 </html>

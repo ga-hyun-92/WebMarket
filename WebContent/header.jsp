@@ -9,6 +9,7 @@
 	String welcomClass="";
 	String productsClass="";
 	String addProductClass="";
+	String cartClass="";
 	
 	if(active==null || active.equals("welcome")){
 		welcomClass="class=\"active\"";
@@ -16,7 +17,9 @@
 		productsClass="class=\"active\"";
 	} else if(active.equals("addProduct")){
 		addProductClass="class=\"active\"";
-	} 
+	} else if(active.equals("cart")){
+		cartClass="class=\"active\"";
+	}
 %>
 
 
@@ -33,7 +36,7 @@
 					<li <%=addProductClass %>><a class="navbar-brand" href="<%=PRODUCT_ADD_PAGE_URL%>">상품등록</a></li>
 					<% } %>
 					
-					<li><a class="navbar-brand" href="#">메뉴3</a></li>
+					<li <%=cartClass%>><a class="navbar-brand" href="<%=CART_PAGE_URL%>">장바구니</a></li>
 				</ul>
 			</div>
 		</div>
