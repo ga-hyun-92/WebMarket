@@ -29,7 +29,7 @@
 			<table width="100%">
 				<tr>
 					<td align="left">
-						<a href="/WebMarket/cart/delete" class="btn btn-danger">삭제하기</a>
+						<a href="/WebMarket/cart/delete/all" class="btn btn-danger">삭제하기</a>
 					</td>
 					<td align="right">
 						<a href="/WebMarket/cart/order" class="btn btn-success">주문하기</a>
@@ -97,11 +97,31 @@
 	<%@ include file="footer.jsp" %>
 	
 	<script>
+	//사용자가 이 페이지로 접근하기 위해 주소 표시줄에 입력한 프로토콜 명
+	//http 또는 https
+	var protocol = location.protocol;
+	//사용자가 이 페이지로 접근하기 위해 주소 표시줄에 입력한 도메인 명(도메인은 집주소와 같음)
+	var domain =location.hostname;
+	//사용자가 이 페이지로 접근하기 위해 주소 표시줄에 입력한 포트 번호
+	//단, 포트번호는 없을 수 있음/ 포트 번호가 없다는 건 프로토콜의 기본 포트 번호를 사용했다는 것
+	//기본 포트 번호- http의 경우, 80번이 기본 포트 번호/ https의 경우, 443번이 기본 포트 번호
+	var port=location.port;
+	
+	//http://192.168.2.31:8081
+	//http://localhost:8081  ->내 컴퓨터에 있는 8081번으로 접근해라
+	//http://127.0.0.1:8081  ->내 컴퓨터에 있는 8081번으로 접근해라
+	var THIS_SITE_FULL_DOMAIN = protocol+"//"+domain;
+	
+	if(port.length !=0 ){
+		//포트번호를 입력하고 이 페이지에 접근했다면
+		THIS_SITE_FULL_DOMAIN += (":"+port);
+	}
+
 		function removeCart(productId){
 			//jQuery-> $로 표시
 			$.ajax({
 				//서블릿 주소
-				url: "http://192.168.2.31:8081/WebMarket/cart/delete",
+				url: THIS_SITE_FULL_DOMAIN+"/WebMarket/cart/delete",
 				//삭제할 상품의 아이디를 전달
 				data: "productId="+productId,
 				success: function(){
